@@ -9,5 +9,6 @@ gem 'sidekiq'
 
 group :development do
   gem 'capistrano'
+  gem 'capistrano-safe-deploy-to'
   gem 'capistrano-sidekiq'
 end

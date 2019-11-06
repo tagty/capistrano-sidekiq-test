@@ -8,6 +8,8 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
+    capistrano-safe-deploy-to (1.1.1)
+      capistrano (>= 3.0)
     capistrano-sidekiq (1.0.3)
       capistrano (>= 3.9.0)
       sidekiq (>= 3.4, < 6.0)
@@ -37,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  capistrano-safe-deploy-to
   capistrano-sidekiq
   sidekiq
 

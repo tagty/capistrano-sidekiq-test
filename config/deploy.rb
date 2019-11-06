@@ -2,7 +2,8 @@
 lock "~> 3.11.2"
 
 set :application, "capistrano-sidekiq-test"
-set :repo_url, "git@example.com:me/my_repo.git"
+# set :repo_url, "git@example.com:me/my_repo.git"
+set :repo_url, "https://github.com/tagty/capistrano-sidekiq-test.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -37,3 +38,5 @@ set :repo_url, "git@example.com:me/my_repo.git"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+set :init_system, :systemd

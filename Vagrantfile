@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/bionic64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -67,4 +67,32 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y git build-essential libssl-dev ruby-build systemd
+  SHELL
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    if ! [ -d ~/.rbenv ]
+    then
+      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+      mkdir -p "$(rbenv root)"/plugins
+      git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+      echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+      echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    fi
+  SHELL
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    if [ -e ~/.rbenv/bin/rbenv ]
+    then
+      export PATH="$HOME/.rbenv/bin:$PATH"
+      eval "$(rbenv init -)"
+
+      rbenv install -s 2.6.5
+      rbenv rehash
+      rbenv global 2.6.5
+    fi
+  SHELL
 end
