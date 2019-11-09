@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y git build-essential libssl-dev ruby-build systemd yarn
+    apt-get install -y git build-essential libssl-dev ruby-build systemd redis yarn
   SHELL
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
